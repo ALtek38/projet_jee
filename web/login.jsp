@@ -8,18 +8,18 @@
     <body>
         <%@page import="java.util.*" %>
         <%@page import="modele.*" %>
-        <form action="Controleur.java">
+        <form action="j_security_check" method="POST">
             <table border=1 cellpadding=10>
                 <TR>
                     <td>Login</td>
-                    <td><input name=login id="login"></input></td>
+                    <td><input name=j_username></input></td>
                 </TR>
                 <TR>
                     <td>Password</td>
-                    <td><input type=password name=password id="password"></input></td>
+                    <td><input type=password name=j_password></input></td>
                 </TR>
                 <TR>
-                    <td colspan=2><input type="submit" value="Connect" name="Operation"/></td>
+                    <td colspan=2><input type="submit" value="Connect"/></td>
                 </TR>
             </table>
         </form>
