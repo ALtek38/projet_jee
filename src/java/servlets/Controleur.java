@@ -179,18 +179,6 @@ public class Controleur extends HttpServlet {
                     request.getRequestDispatcher("error.jsp").forward(request,response);
                 };
                 break;
-           case "Connect" :
-                try{
-                    String param1=request.getParameter("login");
-                    String param2=request.getParameter("password");
-                    System.out.println(param1);
-                    System.out.println(param2);
-                }
-                catch (Exception e){
-                    request.setAttribute("erreur", "erreur requete "+e);
-                    request.getRequestDispatcher("error.jsp").forward(request,response);
-                };                
-            break;
                 
               
             default ://cas où la variable Operation envoyée par les jsp prend la valeur d'un numéro de client

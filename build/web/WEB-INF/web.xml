@@ -30,7 +30,7 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>login.jsp</welcome-file>
+        <welcome-file>redirect.jsp</welcome-file>
     </welcome-file-list>
     <security-constraint>
         <display-name>Constraint1</display-name>
@@ -39,6 +39,10 @@
             <description/>
             <url-pattern>/*</url-pattern>
         </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>user</role-name>
+        </auth-constraint>
     </security-constraint>
     <login-config>
         <auth-method>FORM</auth-method>
