@@ -5,12 +5,14 @@
  */
 package servlets;
 
+import modele.UserSession;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import beans.*;
+import static java.lang.System.console;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,8 +20,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import modele.*;
-
 /**
  *
  * @author p0607615
@@ -79,6 +81,20 @@ public class Controleur extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         switch(request.getParameter("Operation")){
+            case "Connect" :
+                try{
+                    HttpSession session = request.getSession();
+                    String login = request.getParameter("j_username");
+                    String password = request.getParameter("j_password");
+                    // session.setAttribute("login", login);
+                    // session.setAttribute("password", password);
+                    UserSession user = new UserSession (login, password);
+                    session.setAttribute("user",user);
+                    request.getRequestDispatcher("menu.jsp").forward(request,response);
+                } 
+                catch (Exception e){
+                    e.getMessage();
+                }
             case "Afficher tous les enregistrements" :
                 try{
                 requeteur=new MagasinHelper();

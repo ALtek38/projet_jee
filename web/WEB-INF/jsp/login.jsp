@@ -19,7 +19,7 @@
                     <td><input type=password name=j_password></input></td>
                 </TR>
                 <TR>
-                    <td colspan=2><input type="submit" value="Connect"/></td>
+                    <td colspan=2><input type="submit" value="Connect" name="Operation"/></td>
                 </TR>
             </table>
         </form>
