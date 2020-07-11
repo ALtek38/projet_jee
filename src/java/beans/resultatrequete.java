@@ -10,6 +10,8 @@ import modele.*;
 import java.io.Serializable;
 import java.sql.*;
 import java.util.*;
+import java.util.logging.Logger;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -21,9 +23,18 @@ public class resultatrequete implements Serializable {
     private List result;
     private List clients;
     private Customer client;
+    private HttpSession session;
     
     public resultatrequete() {}
-    
+
+    public HttpSession getSession() {
+        return session;
+    }
+
+    public void setSession(HttpSession session) {
+        this.session = session;
+    }
+
     public List getResult() {
         return result;
     }

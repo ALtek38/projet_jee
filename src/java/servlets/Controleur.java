@@ -80,16 +80,25 @@ public class Controleur extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         switch(request.getParameter("Operation")){
             case "Connect" :
                 try{
+                    // on créé l'objet session
                     HttpSession session = request.getSession();
+                    // On récupère le login et le mot de passe (ne fonctionne pas car la page login.jsp ne renvoie pas sur le controleur)
                     String login = request.getParameter("j_username");
                     String password = request.getParameter("j_password");
-                    // session.setAttribute("login", login);
-                    // session.setAttribute("password", password);
+                    // on créé l'utilisateur associé à la session
                     UserSession user = new UserSession (login, password);
-                    session.setAttribute("user",user);
+                    // On définis les attributs de la session
+                    session.setAttribute("user", user);
+                    // On envoie la session au beans
+                    resultatrequete a = new resultatrequete();
+                    a.setSession(session);
+                    // On passe le bean à request
+                    request.setAttribute("session", a);
+                    // On fait passer request à la page menu.jsp
                     request.getRequestDispatcher("menu.jsp").forward(request,response);
                 } 
                 catch (Exception e){

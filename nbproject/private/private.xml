@@ -5,9 +5,12 @@
         <group>
             <file>file:/D:/Cours/LP/JEE/Projet/projet_jee/web/redirect.jsp</file>
             <file>file:/D:/Cours/LP/JEE/Projet/projet_jee/web/WEB-INF/web.xml</file>
-            <file>file:/D:/Cours/LP/JEE/Projet/projet_jee/web/WEB-INF/dispatcher-servlet.xml</file>
+            <file>file:/D:/Cours/LP/JEE/Projet/projet_jee/web/recherche.jsp</file>
             <file>file:/D:/Cours/LP/JEE/Projet/projet_jee/web/WEB-INF/jsp/index.jsp</file>
             <file>file:/D:/Cours/LP/JEE/Projet/projet_jee/src/java/servlets/Controleur.java</file>
+            <file>file:/D:/Cours/LP/JEE/Projet/projet_jee/web/WEB-INF/jsp/login.jsp</file>
+            <file>file:/D:/Cours/LP/JEE/Projet/projet_jee/web/menu.jsp</file>
+            <file>file:/D:/Cours/LP/JEE/Projet/projet_jee/web/detail.jsp</file>
         </group>
     </open-files>
 </project-private>
