@@ -26,7 +26,7 @@
     <ul class="nav navbar-nav">  
         <li><a href="#">Afficher</a></li>  
         <li><a href="#">Insérer</a></li>  
-        <li><a href="#">Rechercher</a></li>          
+        <li><a href="recherche.jsp">Rechercher</a></li>          
     </ul>
 <form action="j_security_check" style="margin-top:8px" class="form-inline">
           <!-- formulaire de connexion version inline 
@@ -36,7 +36,7 @@
        </form></div>  -->
     <ul class="nav navbar-nav navbar-right"> 
         <!-- bouton a afficher une fois log -->
-      <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Se déconnecter</a></li>  
+      <li><a href="login.jsp"></a><span class="glyphicon glyphicon-log-out"></span> Se déconnecter</a></li>  
     </ul>   
 </nav>  
   

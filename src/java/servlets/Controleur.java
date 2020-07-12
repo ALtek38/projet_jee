@@ -55,7 +55,7 @@ public class Controleur extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("vente.jsp");
+        response.sendRedirect("menu.jsp");
        
     }
 
@@ -92,7 +92,7 @@ public class Controleur extends HttpServlet {
                 catch (Exception e){
                     e.getMessage();
                 }
-        response.sendRedirect("vente.jsp");
+        response.sendRedirect("menu.jsp");
     }
 
     /**

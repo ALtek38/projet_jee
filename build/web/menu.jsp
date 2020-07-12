@@ -4,6 +4,7 @@
     <head>
         <%@page import="modele.*" %>
         <jsp:useBean id="sessionUser" class="beans.resultatrequete" scope="request" />
+        <jsp:include page="navbar.jsp" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Menu</title>
     </head>
