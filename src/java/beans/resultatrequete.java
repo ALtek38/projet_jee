@@ -10,6 +10,7 @@ import modele.*;
 import java.io.Serializable;
 import java.sql.*;
 import java.util.*;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -27,7 +28,15 @@ public class resultatrequete implements Serializable {
     private HttpSession session;
     
     public resultatrequete() {}
-    
+
+    public HttpSession getSession() {
+        return session;
+    }
+
+    public void setSession(HttpSession session) {
+        this.session = session;
+    }
+
     public List getResult() {
         return result;
     }
@@ -57,13 +66,5 @@ public class resultatrequete implements Serializable {
     
     public void setVente (Object value)throws SQLException {
         vente=(PurchaseOrder)value;
-    }
-    
-    public HttpSession getSession() {
-        return session;
-    }
-
-    public void setSession(HttpSession session) {
-        this.session = session;
     }
 }
