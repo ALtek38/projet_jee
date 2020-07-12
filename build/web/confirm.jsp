@@ -15,7 +15,7 @@
     <body>
         <h1><%=request.getAttribute("confirm")%> </h1>
         <form action="Controleur" method="POST">
-        <input type="submit" value="Afficher tous les enregistrements" name="Operation" />
+        <input type="submit" value="Afficher tous les enregistrements" name="Operation_client" />
         </form>
     </body>
 </html>

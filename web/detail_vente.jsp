@@ -19,60 +19,45 @@
         <%@page import="modele.*" %>
         <%@page import="java.util.*" %>
         
-        <form name="inscription" action="Controleur_vente" method="POST">
+        <form name="inscription" action="Controleur" method="POST">
            <p>
-                <label for="numero">Numero</label>
-                <input type="text" name="numero" value="<%=String.valueOf(resultat.getClient().getCustomerId()) %>" size="30" id="numero" />
+                <label for="numero">Numero de commande</label>
+                <input type="text" name="numero" value="<%=String.valueOf(resultat.getVente().getOrderNum() %>" size="30" id="numero" />
             </p>
             <p>
-            <label for="nom">Nom</label>
-                <input type="text" name="nom" value="<%=resultat.getClient().getName()%>" size="30" id="nom" />
+            <label for="nom">Client</label>
+                <input type="text" name="nom" value="<%= resultat.getVente().getCustomer() %>" size="30" id="nom" />
             </p>
             <p>
-            <label for="adresse">Adresse</label>
-            <input type="text" name="adresse" value="<%=resultat.getClient().getAddressline1()%>" size="30" id="adresse" />
+            <label for="produit">Produit</label>
+            <input type="text" name="produit" value="<%= resultat.getVente().getProductId() %>" size="30" id="produit" />
             </p>
             <p>
-            <label for="telephone">Téléphone</label>
-            <input type="text" name="telephone" value="<%=resultat.getClient().getPhone()%>" size="30" id="tel" />
+            <label for="quantité">Quantité</label>
+            <input type="text" name="quantité" value="<%= resultat.getVente().getQuantity() %>" size="30" id="quantité" />
             </p>
             <p>
-            <label for="email">E-mail</label>
-            <input type="text" name="email" value="<%=resultat.getClient().getEmail()%>" size="30" id="email"/>
+            <label for="livraison">Coût de livraison</label>
+            <input type="text" name="livraison" value="<%= resultat.getVente().getShippingCost() %>" size="30" id="livraison"/>
             </p>
             <p>
-            <label for="Remise">Remise</label>
-           <select name="Remise" id="dc" >
-                <% List <Character> res=dc.getResult();
-                    for(Character enreg1 : res){
-                        if ( enreg1==resultat.getClient().getDiscountCode())
-                    {
-                        out.println("<option selected=\"selected\">"+enreg1+"</option>");
-                    }
-                    else { out.println("<option>"+enreg1+"</option>"); }
-                 }
-                 %>
-          </select>
+            <label for="date">Date de livraison</label>
+            <input type="text" name="date" value="<%= resultat.getVente().getShippingDate() %>" size="30" id="date"/>
             </p>
             
             <p>
-          <label for="Code_Postal">Code Postal</label>
-          <select name="Code_Postal" id="cp">
-                <% List<MicroMarket> liste=zip.getResult();
-                    for(MicroMarket enreg2 : liste){
-                     if ( enreg2.getZipCode().equals(resultat.getClient().getZip()))
-                    {
-                        out.println("<option selected=\"selected\">"+enreg2.getZipCode()+"</option>");
-                    }
-                    else { out.println("<option>"+enreg2.getZipCode()+"</option>"); }
-                 }
-                 %>
-            </select>
+            <label for="date_vente">Date de vente</label>
+            <input type="text" name="date_vente" value="<%= resultat.getVente().getSalesDate() %>" size="30" id="date_vente"/>
             </p>
             
-            <input type="submit" value="Modifier" name="Operation" />
-            <input type="submit" value="Supprimer" name="Operation" />
-            <input type="submit" value="Afficher les achats" name="Operation" />
+            <p>
+            <label for="date_vente">Compagnie de livraison</label>
+            <input type="text" name="date_vente" value="<%= resultat.getVente().getFreightCompany() %>" size="30" id="date_vente"/>
+            </p>
+            
+            <input type="submit" value="Modifier" name="Operation_vente" />
+            <input type="submit" value="Supprimer" name="Operation_vente" />
+            <input type="submit" value="Afficher les achats" name="Operation_vente" />
         </form>
     </body>
 </html>

@@ -25,8 +25,8 @@
             
             for(Object  ligne : res){
                 out.println("<TR>");           
-                out.println("<TD> <input type=submit value="+String.valueOf(((PurchaseOrder)ligne).getOrderNum())+" name=Operation /></TD>");
-                //out.println("<TD>"+((PurchaseOrder)ligne).getCustomer()+"</TD>");
+                out.println("<TD> <input type=submit value="+String.valueOf(((PurchaseOrder)ligne).getOrderNum())+" name=afficher_client /></TD>");
+                //out.println("<TD>"+((PurchaseOrder)ligne).getCustomer().getName()+"</TD>");
                 out.println("<TD>"+((PurchaseOrder)ligne).getProductId()+"</TD>");
                 out.println("<TD>"+((PurchaseOrder)ligne).getQuantity()+"</TD>");
                 out.println("<TD>"+((PurchaseOrder)ligne).getSalesDate()+"</TD>");

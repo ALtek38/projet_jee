@@ -70,9 +70,9 @@
             </select>
             </p>
             
-            <input type="submit" value="Modifier" name="Operation" />
-            <input type="submit" value="Supprimer" name="Operation" />
-            <input type="submit" value="Afficher les achats" name="Operation" />
+            <input type="submit" value="Modifier" name="Operation_client" />
+            <input type="submit" value="Supprimer" name="Operation_client" />
+            <input type="submit" value="Afficher les achats" name="Operation_client" />
         </form>
     </body>
 </html>

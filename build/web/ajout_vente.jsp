@@ -22,33 +22,41 @@
           <select name="produit" id="produit" >
                 <% List <Object> res=produit.getResult();
                     for(Object enreg1 : res){
-                     out.println("<option>"+(Character)enreg1+"</option>");
+                     out.println("<option>"+((Product)enreg1).getDescription()+"</option>");
                  }
                  %>
           </select>
             </p>
             <p>
-            <label for="adresse">Adresse</label>
-            <input type="text" name="adresse" value="" size="10" id="adresse" />
+            <label for="quantité">Quantité</label>
+            <input type="text" name="quantité" value="" size="10" id="quantité" />
             </p>
             <p>
-            <label for="telephone">Téléphone</label>
-            <input type="text" name="telephone" value="" size="10" id="tel" />
+            <label for="livraison">Coût de livraison</label>
+            <input type="text" name="livraison" value="" size="10" id="livraison" />
             </p>
             <p>
-            <label for="email">E-mail</label>
-            <input type="text" name="email" value="" size="10" id="email"/>
+            <label for="date_livr">Date de livraison</label>
+            <input type="text" name="date_livr" value="" size="10" id="date_livr"/>
+            </p>
+            <p>
+            <label for="vente">Date de vente</label>
+            <input type="text" name="vente" value="" size="10" id="vente"/>
+            </p>
+            <p>
+            <label for="compagnie">Compagnie de livraison</label>
+            <input type="text" name="compagnie" value="" size="10" id="compagnie"/>
             </p>
             <p><label for="client">Client</label>
           <select name="client" id="client" >
                 <%
                     for(Object enreg2 : client.getResult()){
-                     out.println("<option>"+(Character)enreg2+"</option>");
+                     out.println("<option>"+((Customer)enreg2).getName()+"</option>");
                  }
                  %>
           </select>
             </p>
-            <input type="submit" value="Enregistrer la vente" name="Operation" />
+            <input type="submit" value="Enregistrer la vente" name="Operation_vente" />
         </form>
     </body>
 </html>

@@ -23,8 +23,9 @@ public class resultatrequete implements Serializable {
     private List result;
     private List clients;
     private Customer client;
-    private HttpSession session;
+    private PurchaseOrder vente;
     private List ventes;
+    private HttpSession session;
     
     public resultatrequete() {}
 
@@ -49,6 +50,10 @@ public class resultatrequete implements Serializable {
      public Customer getClient() {
         return client;
     }
+     
+     public PurchaseOrder getVente() {
+        return vente;
+    }
      public void setResult (List value)throws SQLException {
         result=value;
     }
@@ -57,5 +62,9 @@ public class resultatrequete implements Serializable {
     }
     public void setClient (Object value)throws SQLException {
         client=(Customer)value;
+    }
+    
+    public void setVente (Object value)throws SQLException {
+        vente=(PurchaseOrder)value;
     }
 }
