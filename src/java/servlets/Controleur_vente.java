@@ -83,7 +83,7 @@ public class Controleur_vente extends HttpServlet{
             case "Afficher toutes les ventes" :
                 try{
                 requeteur=new MagasinHelper();
-                old_resultatrequete a = new old_resultatrequete();
+                resultatrequete a = new resultatrequete();
                 a.setResult(requeteur.getVentes());
                 System.out.println(a);
                 request.setAttribute("resultat",a);//déclaration de mon javabean dans mes paramètres POST
@@ -96,7 +96,7 @@ public class Controleur_vente extends HttpServlet{
             case "Ajouter une nouvelle vente" :
                 try{
                     requeteur=new MagasinHelper();
-                    old_resultatrequete a = new old_resultatrequete();
+                    resultatrequete a = new resultatrequete();
                     a.setResult(requeteur.getClients());
                     request.setAttribute("client",a);
                     request.getRequestDispatcher("ajout_vente.jsp").forward(request,response);
@@ -111,7 +111,7 @@ public class Controleur_vente extends HttpServlet{
             default ://cas où la variable Operation envoyée par les jsp prend la valeur d'un numéro de client
                 try{
                     requeteur=new MagasinHelper();
-                    old_resultatrequete a = new old_resultatrequete();
+                    resultatrequete a = new resultatrequete();
                     a.setClient(requeteur.getVente(Integer.parseInt(request.getParameter("Operation"))));
                     request.setAttribute("resultat",a);
                     //resultatrequete b = new resultatrequete();
