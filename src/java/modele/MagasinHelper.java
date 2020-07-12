@@ -4,10 +4,12 @@
  * and open the template in the editor.
  */
 package modele;
+import java.math.BigDecimal;
 import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import java.util.*;
 import java.sql.*;
+import java.sql.Date;
 
 /**
  *
@@ -28,6 +30,28 @@ public class MagasinHelper {
             
          
             Query q=session.createQuery("from Customer");
+           resultat=q.list();
+          
+        }
+        catch (Exception e) {
+        e.printStackTrace();
+        }
+       finally{
+          if (session.isOpen())session.close();
+        }
+      
+    return resultat;
+}
+    
+    public List getProduits(){
+        List resultat=null;
+      
+        try{
+            if(!session.isOpen())session=HibernateUtil.getSessionFactory().openSession();
+            session.flush();
+            
+         
+            Query q=session.createQuery("from Product");
            resultat=q.list();
           
         }
@@ -110,7 +134,9 @@ public void insertCustomer  (int _customerId, char _discountCode, String _zip) {
     
 }
 
-public void updateCustomer  (int _customerId, String _name, String _adress, String _phone, Character _discountCode, String _zip) {
+
+
+public void insertVente  (int _commande,char _productId, Short _qtt, BigDecimal _cout , Date _livraison, Date _vente, String comp,Customer client) {
     
     Transaction tx=null;
         try{
@@ -119,14 +145,19 @@ public void updateCustomer  (int _customerId, String _name, String _adress, Stri
             
            tx=session.beginTransaction();
             
-            Customer a =new Customer();
-            a.setCustomerId(_customerId);
-            a.setName(_name);
-            a.setAddressline1(_adress);
-            a.setPhone(_phone);
-            a.setDiscountCode(_discountCode);
-            a.setZip(_zip);
-            session.update(a);
+            PurchaseOrder p =new PurchaseOrder();
+            p.setOrderNum(_commande);
+            p.setProductId(_productId);
+            p.setQuantity(_qtt);
+            p.setShippingCost(_cout);
+            p.setShippingDate(_livraison);
+            p.setSalesDate(_vente);
+            p.setFreightCompany(comp);
+            p.setCustomer(client);
+            
+            
+            
+            session.update(p);
             tx.commit();
         }
         catch (Exception e) {
@@ -256,6 +287,37 @@ public void deleteCustomer  (int _id) {
       
     return resultat;
 }
+ 
+public void updateCustomer  (int _customerId, String _name, String _adress, String _phone, Character _discountCode, String _zip) {
+
+    Transaction tx=null;
+        try{
+            if(!session.isOpen())session=HibernateUtil.getSessionFactory().openSession();
+            session.flush();
+
+           tx=session.beginTransaction();
+
+            Customer a =new Customer();
+            a.setCustomerId(_customerId);
+            a.setName(_name);
+            a.setAddressline1(_adress);
+            a.setPhone(_phone);
+            a.setDiscountCode(_discountCode);
+            a.setZip(_zip);
+            session.update(a);
+            tx.commit();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+           tx.rollback();
+            throw e;
+        }
+      finally{
+           if (session.isOpen())session.close();
+        }
+
+}
+
 
 
 }

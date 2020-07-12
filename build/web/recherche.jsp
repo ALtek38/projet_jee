@@ -24,7 +24,7 @@
                 <label for="nom">Nom de l'entreprise</label>
                 <input type="text" name="nom"  size="30" id="nom" />
             </p>
-            <input type="submit" value="rechercher" name="Operation" />
+            <input type="submit" value="rechercher" name="Operation_client" />
         </form>
         
     </body>
