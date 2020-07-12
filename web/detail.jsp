@@ -13,6 +13,7 @@
         <title>Détails</title>
     </head>
     <body>
+        <jsp:include page="navbar.jsp" />
         <jsp:useBean id="resultat" class="beans.resultatrequete" scope="request" />
         <jsp:useBean id="dc" class="beans.resultatrequete" scope="request" />
         <jsp:useBean id="zip" class="beans.resultatrequete" scope="request" />

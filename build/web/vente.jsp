@@ -19,6 +19,7 @@
         <title>Gérer les ventes</title>
     </head>
     <body>
+        <jsp:include page="navbar.jsp" />
         <h1>Gérer les ventes</h1>
         <form action="Controleur" method="POST">
             <div class="form-group col-md-6">

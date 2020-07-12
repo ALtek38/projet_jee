@@ -15,6 +15,7 @@
     <body>
          <%@page import="java.util.*" %>
         <%@page import="modele.*" %>
+        <jsp:include page="navbar.jsp" />
         <jsp:useBean id="client" class="beans.resultatrequete" scope="request" />
         <jsp:useBean id="produit" class="beans.resultatrequete" scope="request" />
         <form name="inscription" action="Controleur" method="POST">

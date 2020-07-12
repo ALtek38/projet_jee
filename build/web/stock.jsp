@@ -19,6 +19,7 @@
         <title>Gérer les stocks</title>
     </head>
     <body>
+        <jsp:include page="navbar.jsp" />
         <h1>Gérer les stocks</h1>
         <form name="form" action="Controleur" method="POST">
             <div class="form-group col-md-6">

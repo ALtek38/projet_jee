@@ -1,4 +1,5 @@
 
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -54,7 +55,7 @@ public class Controleur extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("vente.jsp");
+        response.sendRedirect("menu.jsp");
        
     }
 
@@ -91,7 +92,7 @@ public class Controleur extends HttpServlet {
                 catch (Exception e){
                     e.getMessage();
                 }
-        response.sendRedirect("vente.jsp");
+        response.sendRedirect("menu.jsp");
     }
 
     /**
@@ -105,13 +106,13 @@ public class Controleur extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<String> list_client = Arrays.asList("Afficher tous les clients","Ajouter un nouveau client","Enregistrer le client","Modifier le client","Supprimer le client","Afficher les achats");
+        List<String> list_client = Arrays.asList("Afficher tous les clients","Ajouter un nouveau client","Enregistrer le client","Modifier le client","Supprimer le client","Afficher les achats","Rechercher un client");
         List<String> aff_client = Arrays.asList("");
         List<String> list_vente = Arrays.asList("Afficher toutes les ventes","Ajouter une nouvelle vente","Enregistrer la vente","Modifier la vente","Supprimer la vente");
         //List<String> list_client = Arrays.asList("Afficher tous les clients","Ajouter un nouveau client","Enregistrer le client","Modifier le client","Supprimer le client","Afficher les achats");
         //List<String> list_client = Arrays.asList("Afficher tous les clients","Ajouter un nouveau client","Enregistrer le client","Modifier le client","Supprimer le client","Afficher les achats");
         
-        System.out.println(request.getParameter("afficher_client"));
+        //System.out.println(request.getParameter("afficher_client"));
         
         
         if (list_client.contains(request.getParameter("Operation_client"))){
@@ -127,6 +128,10 @@ public class Controleur extends HttpServlet {
                 catch (SQLException e){
                     e.printStackTrace();
                 }
+            break;
+            case "Rechercher un client" :
+                response.sendRedirect("recherche.jsp");
+                //request.getRequestDispatcher("recherche.jsp").forward(request,response);//renvoie mon résultat à la page resultat.jsp affichée par le navigateur client
             break;
             case "Ajouter un nouveau client" :
                 try{
@@ -227,7 +232,7 @@ public class Controleur extends HttpServlet {
                 requeteur=new MagasinHelper();
                 resultatrequete a = new resultatrequete();
                 a.setResult(requeteur.getVentes());
-                System.out.println(a);
+                //System.out.println(a);
                 request.setAttribute("resultat",a);//déclaration de mon javabean dans mes paramètres POST
                 request.getRequestDispatcher("resultat_vente.jsp").forward(request,response);//renvoie mon résultat à la page resultat.jsp affichée par le navigateur client
                 }
