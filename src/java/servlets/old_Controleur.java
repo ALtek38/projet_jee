@@ -5,14 +5,12 @@
  */
 package servlets;
 
-import modele.UserSession;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import beans.*;
-import static java.lang.System.console;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,13 +18,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import modele.*;
+
 /**
  *
  * @author p0607615
  */
-public class Controleur extends HttpServlet {
+public class old_Controleur extends HttpServlet {
     
     MagasinHelper requeteur;
     String erreur;     
@@ -51,7 +49,8 @@ public class Controleur extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("menu.jsp");
+        response.sendRedirect("vente.jsp");
+       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -80,34 +79,11 @@ public class Controleur extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         switch(request.getParameter("Operation")){
-            case "Connect" :
-                try{
-                    // on créé l'objet session
-                    HttpSession session = request.getSession();
-                    // On récupère le login et le mot de passe (ne fonctionne pas car la page login.jsp ne renvoie pas sur le controleur)
-                    String login = request.getParameter("j_username");
-                    String password = request.getParameter("j_password");
-                    // on créé l'utilisateur associé à la session
-                    UserSession user = new UserSession (login, password);
-                    // On définis les attributs de la session
-                    session.setAttribute("user", user);
-                    // On envoie la session au beans
-                    resultatrequete a = new resultatrequete();
-                    a.setSession(session);
-                    // On passe le bean à request
-                    request.setAttribute("session", a);
-                    // On fait passer request à la page menu.jsp
-                    request.getRequestDispatcher("menu.jsp").forward(request,response);
-                } 
-                catch (Exception e){
-                    e.getMessage();
-                }
             case "Afficher tous les clients" :
                 try{
                 requeteur=new MagasinHelper();
-                resultatrequete a = new resultatrequete();
+                old_resultatrequete a = new old_resultatrequete();
                 a.setResult(requeteur.getClients());
                 request.setAttribute("resultat",a);//déclaration de mon javabean dans mes paramètres POST
                 request.getRequestDispatcher("resultat_client.jsp").forward(request,response);//renvoie mon résultat à la page resultat.jsp affichée par le navigateur client

@@ -9,7 +9,7 @@
     </listener>
     <servlet>
         <servlet-name>Controleur</servlet-name>
-        <servlet-class>servlets.Controleur</servlet-class>
+        <servlet-class>servlets.old_Controleur</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>dispatcher</servlet-name>
