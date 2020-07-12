@@ -66,7 +66,7 @@ public class Controleur extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("menu.jsp");
+        response.sendRedirect("vente.jsp");
     }
 
     /**
@@ -82,6 +82,7 @@ public class Controleur extends HttpServlet {
             throws ServletException, IOException {
         
         switch(request.getParameter("Operation")){
+<<<<<<< HEAD
             case "Connect" :
                 try{
                     // on créé l'objet session
@@ -105,18 +106,21 @@ public class Controleur extends HttpServlet {
                     e.getMessage();
                 }
             case "Afficher tous les enregistrements" :
+=======
+            case "Afficher tous les clients" :
+>>>>>>> 331ba71bd453a65ccf79cfa69a58b46cdbca94ab
                 try{
                 requeteur=new MagasinHelper();
                 resultatrequete a = new resultatrequete();
                 a.setResult(requeteur.getClients());
                 request.setAttribute("resultat",a);//déclaration de mon javabean dans mes paramètres POST
-                request.getRequestDispatcher("resultat.jsp").forward(request,response);//renvoie mon résultat à la page resultat.jsp affichée par le navigateur client
+                request.getRequestDispatcher("resultat_client.jsp").forward(request,response);//renvoie mon résultat à la page resultat.jsp affichée par le navigateur client
                 }
                 catch (SQLException e){
                     e.printStackTrace();
                 }
             break;
-            case "inserer un enregistrement" :
+            case "Ajouter un nouveau client" :
                 try{
                     requeteur=new MagasinHelper();
                     resultatrequete a = new resultatrequete();
@@ -132,7 +136,7 @@ public class Controleur extends HttpServlet {
                 request.getRequestDispatcher("error.jsp").forward(request,response);
                 };
             break;
-            case "Enregistrer" :
+            case "Enregistrer le client" :
                 try{
                 requeteur=new MagasinHelper();
                 String param1 = request.getParameter("nom");
@@ -151,7 +155,7 @@ public class Controleur extends HttpServlet {
                 request.getRequestDispatcher("confirm.jsp").forward(request,response);
                 break;
                
-           case "Modifier" :
+           case "Modifier le client" :
                 try{
                 requeteur=new MagasinHelper();
                 String param1 = request.getParameter("numero");
@@ -170,7 +174,7 @@ public class Controleur extends HttpServlet {
                 request.setAttribute("confirm", "Modification effectuée");
                 request.getRequestDispatcher("confirm.jsp").forward(request,response);
             break;
-            case "Supprimer" :
+            case "Supprimer le client" :
                 try{
                 requeteur=new MagasinHelper();
                 String param1=request.getParameter("numero");

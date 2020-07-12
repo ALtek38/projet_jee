@@ -10,34 +10,35 @@
         <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
         
-        <title>Achats</title>
+        <title>Resultat</title>
     </head>
     <body>
         <%@page import="java.util.*" %>
         <%@page import="modele.*" %>
         <jsp:useBean id="resultat" class="beans.resultatrequete" scope="request" />
+        <form name="Result" action="Controleur" method="POST">
         
-        <H1>Achats du client n°<%=request.getParameter("numero")%></H1>
-        <%            
-            out.println("<table border=1 cellpadding=10>");
-                        
-           // out.println("<TR>");
-            List <Object []> res=resultat.getResult();//jointure native
             
+            <%            
+            out.println("<table border=1 cellpadding=10>") ;
+          List <Object> res=resultat.getResult();//jointure native
             
-           for(Object [] ligne : res){
-                out.println("<TR>");
-                out.println("<TD>"+((PurchaseOrder)ligne[0]).getShippingDate()+"</TD>");
-                out.println("<TD>"+((PurchaseOrder)ligne[0]).getProductId()+"</TD>");
-                out.println("<TD>"+((PurchaseOrder)ligne[0]).getQuantity()+"</TD>");
-                out.println("<TD>"+((PurchaseOrder)ligne[0]).getShippingCost()+"</TD>");
+            for(Object  ligne : res){
+                out.println("<TR>");           
+                out.println("<TD> <input type=submit value="+String.valueOf(((PurchaseOrder)ligne).getOrderNum())+" name=Operation /></TD>");
+                //out.println("<TD>"+((PurchaseOrder)ligne).getCustomer()+"</TD>");
+                out.println("<TD>"+((PurchaseOrder)ligne).getProductId()+"</TD>");
+                out.println("<TD>"+((PurchaseOrder)ligne).getQuantity()+"</TD>");
+                out.println("<TD>"+((PurchaseOrder)ligne).getSalesDate()+"</TD>");
+                out.println("<TD>"+((PurchaseOrder)ligne).getShippingCost()+"</TD>");
+                out.println("<TD>"+((PurchaseOrder)ligne).getShippingDate()+"</TD>");
                 out.println("</TR>");
-           }
-           out.println("<TR>");
-           out.println("</table>");
-                  
-            
+                
+                
+            }
+            out.println("</table>");
+          
         %>
-        
+        </form>
     </body>
 </html>

@@ -19,7 +19,7 @@
         <%@page import="modele.*" %>
         <%@page import="java.util.*" %>
         
-        <form name="inscription" action="Controleur" method="POST">
+        <form name="inscription" action="Controleur_vente" method="POST">
            <p>
                 <label for="numero">Numero</label>
                 <input type="text" name="numero" value="<%=String.valueOf(resultat.getClient().getCustomerId()) %>" size="30" id="numero" />

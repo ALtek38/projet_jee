@@ -15,12 +15,17 @@
     <body>
          <%@page import="java.util.*" %>
         <%@page import="modele.*" %>
-        <jsp:useBean id="cp" class="beans.resultatrequete" scope="request" />
-       <jsp:useBean id="dc" class="beans.resultatrequete" scope="request" />
+        <jsp:useBean id="client" class="beans.resultatrequete" scope="request" />
+        <jsp:useBean id="produit" class="beans.resultatrequete" scope="request" />
         <form name="inscription" action="Controleur" method="POST">
-            <p>
-                <label for="nom">Nom</label>
-                <input type="text" name="nom" value="" size="10" id="nom" />
+            <p><label for="produit">Produit</label>
+          <select name="produit" id="produit" >
+                <% List <Object> res=produit.getResult();
+                    for(Object enreg1 : res){
+                     out.println("<option>"+(Character)enreg1+"</option>");
+                 }
+                 %>
+          </select>
             </p>
             <p>
             <label for="adresse">Adresse</label>
@@ -34,26 +39,16 @@
             <label for="email">E-mail</label>
             <input type="text" name="email" value="" size="10" id="email"/>
             </p>
-            <p><label for="code_remise">Code Remise</label>
-          <select name="code_remise" id="dc" >
-                <% List <Object> res=dc.getResult();
-                    for(Object enreg1 : res){
-                     out.println("<option>"+(Character)enreg1+"</option>");
+            <p><label for="client">Client</label>
+          <select name="client" id="client" >
+                <%
+                    for(Object enreg2 : client.getResult()){
+                     out.println("<option>"+(Character)enreg2+"</option>");
                  }
                  %>
           </select>
             </p>
-            <p>
-                <label for="cp">Code Postal</label>
-            <select name="CP" id="cp">
-                <% for(Object enreg2 : cp.getResult()){
-                     out.println("<option>"+((MicroMarket)enreg2).getZipCode()+"</option>");
-                 }
-                 %>
-            </select>
-            
-            </p>
-            <input type="submit" value="Enregistrer" name="Operation" />
+            <input type="submit" value="Enregistrer la vente" name="Operation" />
         </form>
     </body>
 </html>

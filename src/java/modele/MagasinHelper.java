@@ -163,6 +163,30 @@ public Customer getClient(int id){
     return client;
 }
 
+public PurchaseOrder getVente(int id){
+   
+   
+   PurchaseOrder vente=null;
+    Transaction tx=null;
+        try{
+            if(!session.isOpen())session=HibernateUtil.getSessionFactory().openSession();
+            session.flush();
+            tx=session.beginTransaction();
+           Query q=session.createQuery(" from PurchaseOrder a  where a.orderNum =:_id");
+           q.setInteger("_id", id);
+           vente=(PurchaseOrder)q.list().iterator().next();
+      }
+       catch (Exception e) {
+        System.out.println("erreur toto"+e);
+        e.printStackTrace();
+        }
+       finally{
+          if (session.isOpen())session.close();
+        }
+      
+    return vente;
+}
+
 public void deleteCustomer  (int _id) {
     
     Transaction tx=null;
@@ -197,6 +221,31 @@ public void deleteCustomer  (int _id) {
            Query q=session.createQuery(" from PurchaseOrder as achats join achats.customer a where a.customerId=:_id");
            q.setInteger("_id", id);
             resultat=q.list();
+        }
+        catch (Exception e) {
+        e.printStackTrace();
+        }
+       finally{
+          if (session.isOpen())session.close();
+        }
+      
+    return resultat;
+}
+ 
+ 
+ public List getVentes(){
+        List resultat=null;
+      
+        try{
+            if(!session.isOpen())session=HibernateUtil.getSessionFactory().openSession();
+            session.flush();
+            
+            System.out.println(session.isOpen());
+            
+         
+            Query q=session.createQuery("from PurchaseOrder");
+           resultat=q.list();
+          
         }
         catch (Exception e) {
         e.printStackTrace();
