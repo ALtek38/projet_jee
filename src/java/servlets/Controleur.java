@@ -82,7 +82,6 @@ public class Controleur extends HttpServlet {
             throws ServletException, IOException {
         
         switch(request.getParameter("Operation")){
-<<<<<<< HEAD
             case "Connect" :
                 try{
                     // on créé l'objet session
@@ -105,10 +104,7 @@ public class Controleur extends HttpServlet {
                 catch (Exception e){
                     e.getMessage();
                 }
-            case "Afficher tous les enregistrements" :
-=======
             case "Afficher tous les clients" :
->>>>>>> 331ba71bd453a65ccf79cfa69a58b46cdbca94ab
                 try{
                 requeteur=new MagasinHelper();
                 resultatrequete a = new resultatrequete();
