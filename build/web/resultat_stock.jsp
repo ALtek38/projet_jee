@@ -1,9 +1,3 @@
-<%-- 
-    Document   : customer
-    Created on : 23 juin 2020, 09:27:34
-    Author     : dhond
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,22 +9,33 @@
         <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-
-        <title>Gérer les ventes</title>
+        
+        <title>Resultat</title>
     </head>
     <body>
         <jsp:include page="navbar.jsp" />
-        <h1>Gérer les ventes</h1>
-        <form action="Controleur" method="POST">
-            <div class="form-group col-md-6">
-                <p>Choisissez dans la liste ci-dessous, quel action vous voulez effectuer.</p>
-                <select name="Operation_vente" class="form-control">
-                    <option>Afficher toutes les ventes</option>
-                    <option>Ajouter une nouvelle vente</option>
-                </select>
-                <input type="submit" class="btn btn-primary" value="Valider">
-            </div>
+        <%@page import="java.util.*" %>
+        <%@page import="modele.*" %>
+        <jsp:useBean id="resultat" class="beans.resultatrequete" scope="request" />
+        <form name="Result" action="Controleur" method="POST">
+        
+            
+            <%            
+            out.println("<table border=1 cellpadding=10>") ;
+          List <Object> res=resultat.getResult();//jointure native
+            
+            for(Object  ligne : res){
+                out.println("<TR>");           
+                out.println("<TD> <input type=submit value="+String.valueOf(((Product)ligne).getProductId())+" name=afficher_stock /></TD>");
+                out.println("<TD>"+((Product)ligne).getPurchaseCost()+"</TD>");
+                out.println("<TD>"+((Product)ligne).getQuantityOnHand()+"</TD>");
+                out.println("</TR>");
+                
+                
+            }
+            out.println("</table>");
+          
+        %>
         </form>
     </body>
 </html>
-

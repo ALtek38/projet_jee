@@ -13,6 +13,7 @@
         <title>Enregistrement</title>
     </head>
     <body>
+        <jsp:include page="navbar.jsp" />
          <%@page import="java.util.*" %>
         <%@page import="modele.*" %>
         <jsp:useBean id="cp" class="beans.resultatrequete" scope="request" />

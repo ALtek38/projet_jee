@@ -19,11 +19,12 @@
         <title>Gérer les stocks</title>
     </head>
     <body>
+        <jsp:include page="navbar.jsp" />
         <h1>Gérer les stocks</h1>
         <form name="form" action="Controleur" method="POST">
             <div class="form-group col-md-6">
                 <p>Choisissez dans la liste ci-dessous, quel action vous voulez effectuer.</p>
-                <select name="Operation" class="form-control">
+                <select name="Operation_stock" class="form-control">
                     <option>Afficher tous les stocks</option>
                     <option>Ajouter du stock</option>
                 </select>

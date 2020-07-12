@@ -25,6 +25,7 @@ public class resultatrequete implements Serializable {
     private Customer client;
     private PurchaseOrder vente;
     private List ventes;
+    private List produitscode;
     private HttpSession session;
     
     public resultatrequete() {}
@@ -46,6 +47,10 @@ public class resultatrequete implements Serializable {
     
     public List getVentes(){
         return ventes;
+    }
+    
+    public List getProduitsCode(){
+        return produitscode;
     }
      public Customer getClient() {
         return client;

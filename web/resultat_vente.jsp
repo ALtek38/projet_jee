@@ -13,6 +13,7 @@
         <title>Resultat</title>
     </head>
     <body>
+        <jsp:include page="navbar.jsp" />
         <%@page import="java.util.*" %>
         <%@page import="modele.*" %>
         <jsp:useBean id="resultat" class="beans.resultatrequete" scope="request" />

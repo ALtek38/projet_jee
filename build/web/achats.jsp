@@ -15,6 +15,7 @@
     <body>
         <%@page import="java.util.*" %>
         <%@page import="modele.*" %>
+        <jsp:include page="navbar.jsp" />
         <jsp:useBean id="resultat" class="beans.resultatrequete" scope="request" />
         
         <H1>Achats du client n°<%=request.getParameter("numero")%></H1>

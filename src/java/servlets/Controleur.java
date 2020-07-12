@@ -1,4 +1,5 @@
 
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -54,7 +55,7 @@ public class Controleur extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("vente.jsp");
+        response.sendRedirect("menu.jsp");
        
     }
 
@@ -91,7 +92,7 @@ public class Controleur extends HttpServlet {
                 catch (Exception e){
                     e.getMessage();
                 }
-        response.sendRedirect("vente.jsp");
+        response.sendRedirect("menu.jsp");
     }
 
     /**
@@ -105,13 +106,13 @@ public class Controleur extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<String> list_client = Arrays.asList("Afficher tous les clients","Ajouter un nouveau client","Enregistrer le client","Modifier le client","Supprimer le client","Afficher les achats");
+        List<String> list_client = Arrays.asList("Afficher tous les clients","Ajouter un nouveau client","Enregistrer le client","Modifier le client","Supprimer le client","Afficher les achats","Rechercher un client");
         List<String> aff_client = Arrays.asList("");
         List<String> list_vente = Arrays.asList("Afficher toutes les ventes","Ajouter une nouvelle vente","Enregistrer la vente","Modifier la vente","Supprimer la vente");
-        //List<String> list_client = Arrays.asList("Afficher tous les clients","Ajouter un nouveau client","Enregistrer le client","Modifier le client","Supprimer le client","Afficher les achats");
-        //List<String> list_client = Arrays.asList("Afficher tous les clients","Ajouter un nouveau client","Enregistrer le client","Modifier le client","Supprimer le client","Afficher les achats");
+        List<String> list_produit = Arrays.asList("Afficher tous les produits","Ajouter un nouveau produit");
+        List<String> list_stock = Arrays.asList("Afficher tous les stocks","Ajouter du stock");
         
-        System.out.println(request.getParameter("afficher_client"));
+        //System.out.println(request.getParameter("afficher_client"));
         
         
         if (list_client.contains(request.getParameter("Operation_client"))){
@@ -127,6 +128,10 @@ public class Controleur extends HttpServlet {
                 catch (SQLException e){
                     e.printStackTrace();
                 }
+            break;
+            case "Rechercher un client" :
+                response.sendRedirect("recherche.jsp");
+                //request.getRequestDispatcher("recherche.jsp").forward(request,response);//renvoie mon résultat à la page resultat.jsp affichée par le navigateur client
             break;
             case "Ajouter un nouveau client" :
                 try{
@@ -218,6 +223,24 @@ public class Controleur extends HttpServlet {
                 
               
             default ://cas où la variable Operation envoyée par les jsp prend la valeur d'un numéro de client
+                try{
+                    requeteur=new MagasinHelper();
+                    resultatrequete a = new resultatrequete();
+                    a.setClient(requeteur.getClient(Integer.parseInt(request.getParameter("afficher_client")))); 
+                    request.setAttribute("resultat",a);
+                    resultatrequete b = new resultatrequete();
+                    b.setResult(requeteur.getDiscountCode());
+                    resultatrequete c = new resultatrequete();
+                     c.setResult(requeteur.getMicroMarket());
+                    request.setAttribute("dc",b);
+                    request.setAttribute("zip",c);
+                    request.getRequestDispatcher("detail.jsp").forward(request,response);
+                   
+                }
+                catch (Exception e){
+                    request.setAttribute("erreur", "erreur requete "+e);
+                    request.getRequestDispatcher("error.jsp").forward(request,response);
+                };
                 
         }
         }else if(list_vente.contains(request.getParameter("Operation_vente"))){
@@ -227,7 +250,7 @@ public class Controleur extends HttpServlet {
                 requeteur=new MagasinHelper();
                 resultatrequete a = new resultatrequete();
                 a.setResult(requeteur.getVentes());
-                System.out.println(a);
+                //System.out.println(a);
                 request.setAttribute("resultat",a);//déclaration de mon javabean dans mes paramètres POST
                 request.getRequestDispatcher("resultat_vente.jsp").forward(request,response);//renvoie mon résultat à la page resultat.jsp affichée par le navigateur client
                 }
@@ -291,26 +314,70 @@ public class Controleur extends HttpServlet {
                     request.setAttribute("erreur", "erreur requete "+e);
                     request.getRequestDispatcher("error.jsp").forward(request,response);
                 };
-        }}else if(request.getParameter("afficher_client") == null){
-            try{
+        }
+        }else if(list_produit.contains(request.getParameter("Operation_produit"))){
+        switch(request.getParameter("Operation_produit")){ 
+            case "Afficher tous les produits" :
+                try{
+                requeteur=new MagasinHelper();
+                resultatrequete a = new resultatrequete();
+                a.setResult(requeteur.getProduitsCode());
+                //System.out.println(a);
+                request.setAttribute("resultat",a);//déclaration de mon javabean dans mes paramètres POST
+                request.getRequestDispatcher("resultat_produit.jsp").forward(request,response);//renvoie mon résultat à la page resultat.jsp affichée par le navigateur client
+                }
+                catch (SQLException e){
+                    e.printStackTrace();
+                }
+            break;
+            case "Ajouter un nouveau produit" :
+                requeteur=new MagasinHelper();
+                request.getRequestDispatcher("ajout_produit.jsp").forward(request,response);
+            break;
+            
+                
+              
+            default ://cas où la variable Operation envoyée par les jsp prend la valeur d'un numéro de client
+                try{
                     requeteur=new MagasinHelper();
                     resultatrequete a = new resultatrequete();
-                    a.setClient(requeteur.getClient(Integer.parseInt(request.getParameter("afficher_client")))); 
+                    a.setVente(requeteur.getVente(Integer.parseInt(request.getParameter("Operation_vente"))));
                     request.setAttribute("resultat",a);
-                    resultatrequete b = new resultatrequete();
-                    b.setResult(requeteur.getDiscountCode());
-                    resultatrequete c = new resultatrequete();
-                     c.setResult(requeteur.getMicroMarket());
-                    request.setAttribute("dc",b);
-                    request.setAttribute("zip",c);
-                    request.getRequestDispatcher("detail.jsp").forward(request,response);
+                    //resultatrequete b = new resultatrequete();
+                    //b.setResult(requeteur.getDiscountCode());
+                    //resultatrequete c = new resultatrequete();
+                    // c.setResult(requeteur.getMicroMarket());
+                    //request.setAttribute("dc",b);
+                    //request.setAttribute("zip",c);
+                    request.getRequestDispatcher("detail_vente.jsp").forward(request,response);
                    
                 }
                 catch (Exception e){
                     request.setAttribute("erreur", "erreur requete "+e);
                     request.getRequestDispatcher("error.jsp").forward(request,response);
                 };
-        }else{}
+        }
+        }else if (list_stock.contains(request.getParameter("Operation_stock"))){
+            switch(request.getParameter("Operation_stock")){ 
+            case "Afficher tous les stocks" :
+                try{
+                requeteur=new MagasinHelper();
+                resultatrequete a = new resultatrequete();
+                a.setResult(requeteur.getProduits());
+                //System.out.println(a);
+                request.setAttribute("resultat",a);//déclaration de mon javabean dans mes paramètres POST
+                request.getRequestDispatcher("resultat_stock.jsp").forward(request,response);//renvoie mon résultat à la page resultat.jsp affichée par le navigateur client
+                }
+                catch (SQLException e){
+                    e.printStackTrace();
+                }
+            break;
+            case "Ajouter du stock" :
+                    request.getRequestDispatcher("ajout_stock.jsp").forward(request,response);
+                
+            break;
+            }
+        }
     }
     
 

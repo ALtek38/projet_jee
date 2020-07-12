@@ -65,6 +65,28 @@ public class MagasinHelper {
     return resultat;
 }
     
+    public List getProduitsCode(){
+        List resultat=null;
+      
+        try{
+            if(!session.isOpen())session=HibernateUtil.getSessionFactory().openSession();
+            session.flush();
+            
+         
+            Query q=session.createQuery("from ProductCode");
+           resultat=q.list();
+          
+        }
+        catch (Exception e) {
+        e.printStackTrace();
+        }
+       finally{
+          if (session.isOpen())session.close();
+        }
+      
+    return resultat;
+}
+    
 
 public List getDiscountCode(){
 List resultat=null;

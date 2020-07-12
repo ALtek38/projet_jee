@@ -19,11 +19,12 @@
         <title>Gérer les produits</title>
     </head>
     <body>
+        <jsp:include page="navbar.jsp" />
         <h1>Gérer les produits</h1>
         <form name="form" action="Controleur" method="POST">
             <div class="form-group col-md-6">
                 <p>Choisissez dans la liste ci-dessous, quel action vous voulez effectuer.</p>
-                <select name="Operation" class="form-control">
+                <select name="Operation_produit" class="form-control">
                     <option>Afficher tous les produits</option>
                     <option>Ajouter un nouveau produit</option>
                 </select>
