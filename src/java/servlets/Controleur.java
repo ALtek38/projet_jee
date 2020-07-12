@@ -112,7 +112,7 @@ public class Controleur extends HttpServlet {
         //List<String> list_client = Arrays.asList("Afficher tous les clients","Ajouter un nouveau client","Enregistrer le client","Modifier le client","Supprimer le client","Afficher les achats");
         //List<String> list_client = Arrays.asList("Afficher tous les clients","Ajouter un nouveau client","Enregistrer le client","Modifier le client","Supprimer le client","Afficher les achats");
         
-        System.out.println(request.getParameter("afficher_client"));
+        //System.out.println(request.getParameter("afficher_client"));
         
         
         if (list_client.contains(request.getParameter("Operation_client"))){
@@ -228,7 +228,7 @@ public class Controleur extends HttpServlet {
                 requeteur=new MagasinHelper();
                 resultatrequete a = new resultatrequete();
                 a.setResult(requeteur.getVentes());
-                System.out.println(a);
+                //System.out.println(a);
                 request.setAttribute("resultat",a);//déclaration de mon javabean dans mes paramètres POST
                 request.getRequestDispatcher("resultat_vente.jsp").forward(request,response);//renvoie mon résultat à la page resultat.jsp affichée par le navigateur client
                 }
