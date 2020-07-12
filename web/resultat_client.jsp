@@ -25,7 +25,7 @@
             
             for(Object  ligne : res){
                 out.println("<TR>");           
-                out.println("<TD> <input type=submit value="+String.valueOf(((Customer)ligne).getCustomerId())+" name=Operation /></TD>");
+                out.println("<TD> <input type=submit value="+String.valueOf(((Customer)ligne).getCustomerId())+" name=Operation_client /></TD>");
                 out.println("<TD>"+((Customer)ligne).getName()+"</TD>");
                 out.println("<TD>"+((Customer)ligne).getZip()+"</TD>");
                 out.println("<TD>"+((Customer)ligne).getAddressline1()+"</TD>");

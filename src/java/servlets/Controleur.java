@@ -12,13 +12,17 @@ import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import beans.*;
 import java.sql.*;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import modele.*;
+import modele.UserSession;
 
 /**
  *
@@ -65,6 +69,27 @@ public class Controleur extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+         try{
+                    // on créé l'objet session
+                    HttpSession session = request.getSession();
+                    // On récupère le login et le mot de passe (ne fonctionne pas car la page login.jsp ne renvoie pas sur le controleur)
+                    String login = request.getParameter("j_username");
+                    String password = request.getParameter("j_password");
+                    // on créé l'utilisateur associé à la session
+                    UserSession user = new UserSession (login, password);
+                    // On définis les attributs de la session
+                    session.setAttribute("user", user);
+                    // On envoie la session au beans
+                    resultatrequete a = new resultatrequete();
+                    a.setSession(session);
+                    // On passe le bean à request
+                    request.setAttribute("session", a);
+                    // On fait passer request à la page menu.jsp
+                    request.getRequestDispatcher("menu.jsp").forward(request,response);
+                } 
+                catch (Exception e){
+                    e.getMessage();
+                }
         response.sendRedirect("vente.jsp");
     }
 
@@ -79,7 +104,17 @@ public class Controleur extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        switch(request.getParameter("Operation")){
+        List<String> list_client = Arrays.asList("Afficher tous les clients","Ajouter un nouveau client","Enregistrer le client","Modifier le client","Supprimer le client","Afficher les achats");
+        List<String> aff_client = Arrays.asList("");
+        List<String> list_vente = Arrays.asList("Afficher toutes les ventes","Ajouter une nouvelle vente","Enregistrer la vente","Modifier la vente","Supprimer la vente");
+        //List<String> list_client = Arrays.asList("Afficher tous les clients","Ajouter un nouveau client","Enregistrer le client","Modifier le client","Supprimer le client","Afficher les achats");
+        //List<String> list_client = Arrays.asList("Afficher tous les clients","Ajouter un nouveau client","Enregistrer le client","Modifier le client","Supprimer le client","Afficher les achats");
+        
+        System.out.println(request.getParameter("afficher_client"));
+        
+        
+        if (list_client.contains(request.getParameter("Operation_client"))){
+        switch(request.getParameter("Operation_client")){
             case "Afficher tous les clients" :
                 try{
                 requeteur=new MagasinHelper();
@@ -182,10 +217,84 @@ public class Controleur extends HttpServlet {
                 
               
             default ://cas où la variable Operation envoyée par les jsp prend la valeur d'un numéro de client
+                
+        }
+        }else if(list_vente.contains(request.getParameter("Operation_vente"))){
+        switch(request.getParameter("Operation_vente")){ 
+            case "Afficher toutes les ventes" :
+                try{
+                requeteur=new MagasinHelper();
+                resultatrequete a = new resultatrequete();
+                a.setResult(requeteur.getVentes());
+                System.out.println(a);
+                request.setAttribute("resultat",a);//déclaration de mon javabean dans mes paramètres POST
+                request.getRequestDispatcher("resultat_vente.jsp").forward(request,response);//renvoie mon résultat à la page resultat.jsp affichée par le navigateur client
+                }
+                catch (SQLException e){
+                    //e.printStackTrace();
+                }
+            break;
+            case "Ajouter une nouvelle vente" :
                 try{
                     requeteur=new MagasinHelper();
                     resultatrequete a = new resultatrequete();
-                    a.setClient(requeteur.getClient(Integer.parseInt(request.getParameter("Operation"))));
+                    resultatrequete b = new resultatrequete();
+                    a.setResult(requeteur.getClients());
+                    b.setResult(requeteur.getProduits());
+                    request.setAttribute("produit",b);
+                    request.setAttribute("client",a);
+                    request.getRequestDispatcher("ajout_vente.jsp").forward(request,response);
+                }         
+                catch (SQLException e){
+                request.setAttribute("erreur", "erreur requete "+e);
+                request.getRequestDispatcher("error.jsp").forward(request,response);
+                };
+            break;
+            case "Enregistrer la vente" :
+                try{
+                requeteur=new MagasinHelper();
+                String param1 = request.getParameter("produit");
+                String param2 = request.getParameter("quantité");
+                String param3 = request.getParameter("livraison");
+                String param4 = request.getParameter("date_livr");
+                String param5 = request.getParameter("vente");
+                String param6 = request.getParameter("compagnie");
+                String param7 = request.getParameter("client");
+                //requeteur.insertVente(30000, param1.charAt(0),(Short)param2,(Bigparam3,param4,param5, param6,param7);
+                }
+                catch (Exception e){
+                request.setAttribute("erreur", "erreur requete "+e);
+                request.getRequestDispatcher("error.jsp").forward(request,response);
+                };
+                request.setAttribute("confirm", "Enregistrement effectué");
+                request.getRequestDispatcher("confirm.jsp").forward(request,response);
+                break;
+                
+              
+            default ://cas où la variable Operation envoyée par les jsp prend la valeur d'un numéro de client
+                try{
+                    requeteur=new MagasinHelper();
+                    resultatrequete a = new resultatrequete();
+                    a.setVente(requeteur.getVente(Integer.parseInt(request.getParameter("Operation_vente"))));
+                    request.setAttribute("resultat",a);
+                    //resultatrequete b = new resultatrequete();
+                    //b.setResult(requeteur.getDiscountCode());
+                    //resultatrequete c = new resultatrequete();
+                    // c.setResult(requeteur.getMicroMarket());
+                    //request.setAttribute("dc",b);
+                    //request.setAttribute("zip",c);
+                    request.getRequestDispatcher("detail_vente.jsp").forward(request,response);
+                   
+                }
+                catch (Exception e){
+                    request.setAttribute("erreur", "erreur requete "+e);
+                    request.getRequestDispatcher("error.jsp").forward(request,response);
+                };
+        }}else if(request.getParameter("afficher_client") == null){
+            try{
+                    requeteur=new MagasinHelper();
+                    resultatrequete a = new resultatrequete();
+                    a.setClient(requeteur.getClient(Integer.parseInt(request.getParameter("afficher_client")))); 
                     request.setAttribute("resultat",a);
                     resultatrequete b = new resultatrequete();
                     b.setResult(requeteur.getDiscountCode());
@@ -200,7 +309,7 @@ public class Controleur extends HttpServlet {
                     request.setAttribute("erreur", "erreur requete "+e);
                     request.getRequestDispatcher("error.jsp").forward(request,response);
                 };
-        }           
+        }else{}
     }
     
 

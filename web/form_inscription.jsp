@@ -53,7 +53,7 @@
             </select>
             
             </p>
-            <input type="submit" value="Enregistrer" name="Operation" />
+            <input type="submit" value="Enregistrer" name="Operation_client" />
         </form>
     </body>
 </html>
