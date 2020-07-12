@@ -1,9 +1,7 @@
-<<<<<<< HEAD
-
 nbproject/project.properties
 nbproject/private/private.properties
 nbproject/private/private.xml
-=======
-./nbproject/project.properties
-./nbproject/private/private.properties
->>>>>>> ac3917818acfaa1cf3794fb91e56019941fb05f1
+nbproject/project.properties
+nbproject/private/private.properties
+nbproject/private/private.xml
+*.properties
