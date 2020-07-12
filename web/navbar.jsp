@@ -20,13 +20,14 @@
 <nav class="navbar navbar-inverse">  
   <div class="container-fluid">  
     <div class="navbar-header">  
-      <a class="navbar-brand" href="#">LDLX</a>  
+      <a class="navbar-brand" href="menu.jsp">LDLX</a>  
     </div>  
       <!-- elements du menu a basculer en visible une fois loggé -->
     <ul class="nav navbar-nav">  
-        <li><a href="#">Afficher</a></li>  
-        <li><a href="#">Insérer</a></li>  
-        <li><a href="recherche.jsp">Rechercher</a></li>          
+        <li><a href="customer.jsp">Client</a></li>  
+        <li><a href="stock.jsp">Stock</a></li>  
+        <li><a href="recherche.jsp">Rechercher</a></li>
+        <li><a href="vente.jsp">Vente</a></li>
     </ul>
 <form action="j_security_check" style="margin-top:8px" class="form-inline">
           <!-- formulaire de connexion version inline 
