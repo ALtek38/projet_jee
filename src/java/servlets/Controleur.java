@@ -106,7 +106,7 @@ public class Controleur extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<String> list_client = Arrays.asList("Afficher tous les clients","Ajouter un nouveau client","Enregistrer le client","Modifier le client","Supprimer le client","Afficher les achats");
+        List<String> list_client = Arrays.asList("Afficher tous les clients","Ajouter un nouveau client","Enregistrer le client","Modifier le client","Supprimer le client","Afficher les achats","Rechercher un client");
         List<String> aff_client = Arrays.asList("");
         List<String> list_vente = Arrays.asList("Afficher toutes les ventes","Ajouter une nouvelle vente","Enregistrer la vente","Modifier la vente","Supprimer la vente");
         //List<String> list_client = Arrays.asList("Afficher tous les clients","Ajouter un nouveau client","Enregistrer le client","Modifier le client","Supprimer le client","Afficher les achats");
@@ -128,6 +128,10 @@ public class Controleur extends HttpServlet {
                 catch (SQLException e){
                     e.printStackTrace();
                 }
+            break;
+            case "Rechercher un client" :
+                response.sendRedirect("recherche.jsp");
+                //request.getRequestDispatcher("recherche.jsp").forward(request,response);//renvoie mon résultat à la page resultat.jsp affichée par le navigateur client
             break;
             case "Ajouter un nouveau client" :
                 try{
